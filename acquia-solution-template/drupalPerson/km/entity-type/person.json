@@ -1,0 +1,7 @@
+{
+  "$id": "drupalPerson_person",
+  "$schema": "https://schema.yext.com/config/km/entity-type/v1",
+  "description": "",
+  "displayName": "Drupal Person",
+  "pluralDisplayName": "People"
+}

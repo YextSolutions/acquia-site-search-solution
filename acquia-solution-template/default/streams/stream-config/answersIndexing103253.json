@@ -1,0 +1,24 @@
+{
+  "$id": "answersIndexing103253",
+  "$schema": "https://schema.yext.com/config/streams/stream-config/v1",
+  "source": "knowledgeGraph",
+  "destination": "answers",
+  "fields": [
+    "uid",
+    "id",
+    "timezone",
+    "meta",
+    "savedFilters",
+    "name"
+  ],
+  "filter": {
+    "entityTypes": [
+      "drupalPage_page"
+    ]
+  },
+  "localization": {
+    "locales": [
+      "en"
+    ]
+  }
+}

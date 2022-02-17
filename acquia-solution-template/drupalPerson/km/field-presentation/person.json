@@ -1,0 +1,54 @@
+{
+  "$id": "drupalPerson_person",
+  "$schema": "https://schema.yext.com/config/km/field-presentation/v1",
+  "entityType": "drupalPerson_person",
+  "displayName": "Person",
+  "presentationEntries": [
+    {
+      "displayName": "Core Information",
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "name"
+        },
+        {
+          "id": "entityId"
+        },
+        {
+          "id": "mainPhone",
+          "visibleOnAdd": true
+        },
+        {
+          "id": "landingPageUrl"
+        }
+      ]
+    },
+    {
+      "displayName": "Person Details",
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "emails"
+        },
+        {
+          "id": "drupalPerson_jobTitle"
+        },
+        {
+          "id": "keywords"
+        },
+        {
+          "id": "drupalPerson_drupalDescription"
+        }
+      ]
+    },
+    {
+      "displayName": "Media",
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "photoGallery"
+        }
+      ]
+    }
+  ]
+}
