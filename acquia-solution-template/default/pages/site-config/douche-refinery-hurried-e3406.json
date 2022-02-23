@@ -1,7 +1,7 @@
 {
-  "$id": "douche-refinery-hurried-e3406",
+  "$id": "acquia-answers",
   "$schema": "https://schema.yext.com/config/pages/site-config/v1",
-  "siteName": "acquia-answers",
+  "siteName": "Acquia Answers",
   "repoConfig": {
     "targetRepoName": "acquia-answers-${{businessId}}.com",
     "templateRepo": "github.com/yext-pages/answers.acquia.com"
