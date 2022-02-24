@@ -1,7 +1,0 @@
-{
-  "$id": "drupalPage_page",
-  "$schema": "https://schema.yext.com/config/km/entity-type/v2",
-  "description": "",
-  "displayName": "Drupal Page",
-  "pluralDisplayName": "Pages"
-}
