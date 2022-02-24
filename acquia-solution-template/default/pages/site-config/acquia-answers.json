@@ -6,7 +6,7 @@
     "targetRepoName": "acquia-answers-${{businessId}}.com",
     "templateRepo": "github.com/yext-pages/answers.acquia.com"
   },
-   "domain": "searchembed.pagescdn.com",
+  "domain": "searchembed.pagescdn.com",
   "publishingConfig": {
     "pinnedStagingBranchName": "refs/heads/master",
     "pinnedProductionBranchName": "refs/heads/master",
