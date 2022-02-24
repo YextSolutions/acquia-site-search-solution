@@ -1,0 +1,11 @@
+{
+  "$id": "drupalArticle_article.default",
+  "$schema": "https://schema.yext.com/config/km/field-eligibility-group/v1",
+  "name": "Drupal Article-default",
+  "entityType": "drupalArticle_article",
+  "fields": [
+    "body",
+    "landingPageUrl"
+  ],
+  "required": []
+}
