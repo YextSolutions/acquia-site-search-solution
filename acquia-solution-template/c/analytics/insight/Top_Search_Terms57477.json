@@ -14,12 +14,6 @@
       {
         "filter": "yext/date",
         "in": "DAYS_14"
-      },
-      {
-        "filter": "yext/ANSWERS_EXPERIENCE",
-        "in": [
-          "acquia-answers"
-        ]
       }
     ]
   },
