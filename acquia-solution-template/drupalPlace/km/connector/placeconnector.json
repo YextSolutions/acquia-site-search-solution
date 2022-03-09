@@ -169,11 +169,6 @@
       ]
     },
     {
-      "field": "languages",
-      "header": "Language Code",
-      "subfieldPath": []
-    },
-    {
       "field": "displayCoordinate",
       "header": "Longitude",
       "subfieldPath": [
