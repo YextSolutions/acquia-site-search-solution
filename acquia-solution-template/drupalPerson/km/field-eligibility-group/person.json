@@ -4,7 +4,7 @@
   "name": "Drupal Person",
   "entityType": "drupalPerson_person",
   "fields": [
-    "drupalPerson_drupalDescription",
+    "drupalPerson_drupalDescription_v2",
     "drupalPerson_jobTitle",
     "emails",
     "keywords",

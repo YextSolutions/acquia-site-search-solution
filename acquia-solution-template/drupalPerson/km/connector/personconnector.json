@@ -1,17 +1,36 @@
 {
   "$id": "drupalPerson_personconnector",
-  "$schema": "https://schema.yext.com/config/km/connector/v2",
+  "$schema": "https://schema.yext.com/config/km/connector/v4",
   "displayName": "Drupal Person Connector",
-  "entityType": "drupalPerson_person",
+  "entityTypes": [
+    "drupalPerson_person"
+  ],
   "source": {
     "sourceConfig": {
-      "nativeSourceConfig": {
-        "source": "drupal",
-        "operation": "fetchPersonContent",
-        "inputs": {
-          "drupalDomain": "${{drupalDomain}}"
-        }
+      "apiPullConfig": {
+        "requestType": "GET",
+        "url": "https://yextdemo.acsfpmm.acsitefactory.com/jsonapi/node/person",
+        "paginationControl": {
+          "cursorPagination": {
+            "cursor": "links.next",
+            "cursorType": "FULL_URL",
+            "detectCursorInHeader": false
+          }
+        },
+        "headers": {
+          "Accept": "application/vnd.api+json",
+          "Content-Type": "application/vnd.api+json"
+        },
+        "queryParams": {
+          "per_page": "50"
+        },
+        "dataFormat": "JSON"
       }
+    },
+    "baseSelector": {
+      "type": "JSON",
+      "header": "data",
+      "path": "data"
     },
     "selectors": [
       {
@@ -66,39 +85,50 @@
   ],
   "mappings": [
     {
-      "field": "landingPageUrl",
       "header": "Landing Page URL",
-      "subfieldPath": []
+      "field": "landingPageUrl",
+      "subfieldPath": [],
+      "clearValueIfBlank": false
     },
     {
-      "field": "emails",
       "header": "Email",
-      "subfieldPath": []
+      "field": "emails",
+      "subfieldPath": [],
+      "clearValueIfBlank": false
     },
     {
-      "field": "entityId",
-      "header": "ID",
-      "subfieldPath": []
-    },
-    {
-      "field": "drupalPerson_jobTitle",
-      "header": "Job Title",
-      "subfieldPath": []
-    },
-    {
-      "field": "mainPhone",
-      "header": "Phone Number",
-      "subfieldPath": []
-    },
-    {
-      "field": "name",
-      "header": "Name",
-      "subfieldPath": []
-    },
-    {
-      "field": "drupalPerson_drupalDescription",
       "header": "Description",
-      "subfieldPath": []
+      "field": "drupalPerson_drupalDescription_v2",
+      "subfieldPath": [
+        {
+          "name": "json"
+        }
+      ],
+      "clearValueIfBlank": false
+    },
+    {
+      "header": "ID",
+      "field": "entityId",
+      "subfieldPath": [],
+      "clearValueIfBlank": false
+    },
+    {
+      "header": "Job Title",
+      "field": "drupalPerson_jobTitle",
+      "subfieldPath": [],
+      "clearValueIfBlank": false
+    },
+    {
+      "header": "Phone Number",
+      "field": "mainPhone",
+      "subfieldPath": [],
+      "clearValueIfBlank": false
+    },
+    {
+      "header": "Name",
+      "field": "name",
+      "subfieldPath": [],
+      "clearValueIfBlank": false
     }
   ],
   "scheduleConfig": {
@@ -109,5 +139,9 @@
       "frequencyType": "DAILY"
     },
     "runMode": "COMPREHENSIVE"
+  },
+  "comprehensiveModeConfig": {
+    "comprehensiveSet": "ENTITIES_CREATED_BY_THIS_CONNECTOR",
+    "actionOnMissingEntities": "DELETE"
   }
 }

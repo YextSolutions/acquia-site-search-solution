@@ -4,7 +4,7 @@
   "name": "Event",
   "entityType": "event",
   "fields": [
-    "drupalEvent_drupalDescription"
+    "drupalEvent_drupalDescription_v2"
   ],
   "required": []
 }

@@ -4,7 +4,7 @@
   "name": "Drupal Page",
   "entityType": "drupalPage_page",
   "fields": [
-    "drupalPage_drupalDescription",
+    "drupalPage_drupalDescription_v2",
     "keywords",
     "landingPageUrl",
     "photoGallery"

@@ -1,17 +1,36 @@
 {
   "$id": "drupalPage_pageconnector",
-  "$schema": "https://schema.yext.com/config/km/connector/v2",
+  "$schema": "https://schema.yext.com/config/km/connector/v4",
   "displayName": "Drupal Page Connector",
-  "entityType": "drupalPage_page",
+  "entityTypes": [
+    "drupalPage_page"
+  ],
   "source": {
     "sourceConfig": {
-      "nativeSourceConfig": {
-        "source": "drupal",
-        "operation": "fetchPageContent",
-        "inputs": {
-          "drupalDomain": "${{drupalDomain}}"
-        }
+      "apiPullConfig": {
+        "requestType": "GET",
+        "url": "https://yextdemo.acsfpmm.acsitefactory.com/jsonapi/node/page",
+        "paginationControl": {
+          "cursorPagination": {
+            "cursor": "links.next",
+            "cursorType": "FULL_URL",
+            "detectCursorInHeader": false
+          }
+        },
+        "headers": {
+          "Accept": "application/vnd.api+json",
+          "Content-Type": "application/vnd.api+json"
+        },
+        "queryParams": {
+          "per_page": "50"
+        },
+        "dataFormat": "JSON"
       }
+    },
+    "baseSelector": {
+      "type": "JSON",
+      "header": "data",
+      "path": "data"
     },
     "selectors": [
       {
@@ -51,24 +70,32 @@
   ],
   "mappings": [
     {
-      "field": "landingPageUrl",
       "header": "Landing Page URL",
-      "subfieldPath": []
+      "field": "landingPageUrl",
+      "subfieldPath": [],
+      "clearValueIfBlank": false
     },
     {
-      "field": "entityId",
-      "header": "ID",
-      "subfieldPath": []
-    },
-    {
-      "field": "name",
-      "header": "Name",
-      "subfieldPath": []
-    },
-    {
-      "field": "drupalPage_drupalDescription",
       "header": "Description",
-      "subfieldPath": []
+      "field": "drupalPage_drupalDescription_v2",
+      "subfieldPath": [
+        {
+          "name": "json"
+        }
+      ],
+      "clearValueIfBlank": false
+    },
+    {
+      "header": "ID",
+      "field": "entityId",
+      "subfieldPath": [],
+      "clearValueIfBlank": false
+    },
+    {
+      "header": "Name",
+      "field": "name",
+      "subfieldPath": [],
+      "clearValueIfBlank": false
     }
   ],
   "scheduleConfig": {
@@ -79,5 +106,9 @@
       "frequencyType": "DAILY"
     },
     "runMode": "COMPREHENSIVE"
+  },
+  "comprehensiveModeConfig": {
+    "comprehensiveSet": "ENTITIES_CREATED_BY_THIS_CONNECTOR",
+    "actionOnMissingEntities": "DELETE"
   }
 }

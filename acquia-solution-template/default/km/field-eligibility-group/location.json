@@ -4,7 +4,7 @@
   "name": "Location",
   "entityType": "location",
   "fields": [
-    "drupalPlace_drupalDescription"
+    "drupalPlace_drupalDescription_v2"
   ],
   "required": []
 }

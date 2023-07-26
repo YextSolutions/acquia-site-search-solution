@@ -1,5 +1,5 @@
 {
-  "$id": "drupalEvent_drupalDescription",
+  "$id": "drupalEvent_drupalDescription_v2",
   "$schema": "https://schema.yext.com/config/km/field/v1",
   "description": "Rich Text Description for Drupal Content Types",
   "displayName": "Drupal Description",
