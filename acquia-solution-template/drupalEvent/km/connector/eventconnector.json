@@ -1,181 +1,156 @@
 {
-  "$id": "drupalEvent_eventconnector",
-  "$schema": "https://schema.yext.com/config/km/connector/v4",
-  "displayName": "Drupal Event Connector",
-  "entityTypes": [
-    "event"
-  ],
-  "source": {
-    "sourceConfig": {
-      "apiPullConfig": {
-        "requestType": "GET",
-        "url": "https://yextdemo.acsfpmm.acsitefactory.com/jsonapi/node/event",
-        "paginationControl": {
-          "cursorPagination": {
-            "cursor": "links.next",
-            "cursorType": "FULL_URL",
-            "detectCursorInHeader": false
-          }
+    "$id": "drupalEvent_eventconnector",
+    "$schema": "https://schema.yext.com/config/km/connector/v4",
+    "displayName": "Drupal Event Connector",
+    "entityTypes": [
+        "event"
+    ],
+    "source": {
+        "sourceConfig": {
+            "nativeSourceConfig": {
+                "source": "drupal",
+                "operation": "fetchEventContent",
+                "inputs": {
+                    "drupalDomain": "${{drupalDomain}}"
+                }
+            }
         },
-        "headers": {
-          "Accept": "application/vnd.api+json",
-          "Content-Type": "application/vnd.api+json"
-        },
-        "queryParams": {
-          "per_page": "50"
-        },
-        "dataFormat": "JSON"
-      }
+        "selectors": [
+            {
+                "type": "JSON",
+                "header": "ID",
+                "path": "id"
+            },
+            {
+                "type": "JSON",
+                "header": "Name",
+                "path": "attributes.title"
+            },
+            {
+                "type": "JSON",
+                "header": "Description",
+                "path": "attributes.body.value"
+            },
+            {
+                "type": "JSON",
+                "header": "Event Start",
+                "path": "attributes.field_event_start"
+            },
+            {
+                "type": "JSON",
+                "header": "Event End",
+                "path": "attributes.field_event_end"
+            },
+            {
+                "type": "JSON",
+                "header": "Location",
+                "path": "relationships.field_event_place.data.id"
+            },
+            {
+                "type": "JSON",
+                "header": "Landing Page URL",
+                "path": "attributes.drupal_internal__nid"
+            }
+        ]
     },
-    "baseSelector": {
-      "type": "JSON",
-      "header": "data",
-      "path": "data"
-    },
-    "selectors": [
-      {
-        "type": "JSON",
-        "header": "ID",
-        "path": "id"
-      },
-      {
-        "type": "JSON",
-        "header": "Name",
-        "path": "attributes.title"
-      },
-      {
-        "type": "JSON",
-        "header": "Description",
-        "path": "attributes.body.value"
-      },
-      {
-        "type": "JSON",
-        "header": "Event Start",
-        "path": "attributes.field_event_start"
-      },
-      {
-        "type": "JSON",
-        "header": "Event End",
-        "path": "attributes.field_event_end"
-      },
-      {
-        "type": "JSON",
-        "header": "Location",
-        "path": "relationships.field_event_place.data.id"
-      },
-      {
-        "type": "JSON",
-        "header": "Landing Page URL",
-        "path": "attributes.drupal_internal__nid"
-      }
-    ]
-  },
-  "transforms": [
-    {
-      "function": {
-        "inputHeaders": {
-          "headers": [
-            "Landing Page URL"
-          ]
+    "transforms": [
+        {
+            "function": {
+                "inputHeaders": {
+                    "headers": [
+                        "Landing Page URL"
+                    ]
+                },
+                "plugin": "drupalEvent_constructUrl",
+                "function": "constructUrl"
+            }
         },
-        "plugin": "drupalEvent_constructUrl",
-        "function": "constructUrl"
-      }
-    },
-    {
-      "findAndReplace": {
-        "inputHeaders": {
-          "headers": [
-            "Event Start",
-            "Event End"
-          ]
+        {
+            "findAndReplace": {
+                "inputHeaders": {
+                    "headers": [
+                        "Event Start",
+                        "Event End"
+                    ]
+                },
+                "valueToFind": {
+                    "regex": "-[0-9]{1,2}:[0-9]{2}"
+                },
+                "replacement": ""
+            }
         },
-        "valueToFind": {
-          "regex": "-[0-9]{1,2}:[0-9]{2}"
+        {
+            "addColumn": {
+                "newColumnHeader": "Time Zone",
+                "columnValue": "America/New_York"
+            }
+        }
+    ],
+    "mappings": [
+        {
+            "field": "landingPageUrl",
+            "header": "Landing Page URL",
+            "subfieldPath": []
         },
-        "replacement": ""
-      }
+        {
+            "field": "time",
+            "header": "Event Start",
+            "subfieldPath": [
+                {
+                    "name": "start"
+                }
+            ]
+        },
+        {
+            "field": "entityId",
+            "header": "ID",
+            "subfieldPath": []
+        },
+        {
+            "field": "time",
+            "header": "Event End",
+            "subfieldPath": [
+                {
+                    "name": "end"
+                }
+            ]
+        },
+        {
+            "field": "name",
+            "header": "Name",
+            "subfieldPath": []
+        },
+        {
+            "field": "linkedLocation",
+            "header": "Location",
+            "subfieldPath": []
+        },
+        {
+            "field": "timezone",
+            "header": "Time Zone",
+            "subfieldPath": []
+        },
+        {
+            "field": "drupalEvent_drupalDescription",
+            "header": "Description",
+            "subfieldPath": [
+                {
+                    "name": "markdown"
+                }
+            ]
+        }
+    ],
+    "scheduleConfig": {
+        "customSchedule": {
+            "timeZone": "America/New_York",
+            "startDate": "2021-06-23",
+            "startTime": "03:00",
+            "frequencyType": "DAILY"
+        },
+        "runMode": "COMPREHENSIVE"
     },
-    {
-      "addColumn": {
-        "newColumnHeader": "Time Zone",
-        "columnValue": "America/New_York"
-      }
+    "comprehensiveModeConfig": {
+        "comprehensiveSet": "ENTITIES_CREATED_BY_THIS_CONNECTOR",
+        "actionOnMissingEntities": "DELETE"
     }
-  ],
-  "mappings": [
-    {
-      "header": "Time Zone",
-      "field": "timezone",
-      "subfieldPath": [],
-      "clearValueIfBlank": false
-    },
-    {
-      "header": "Landing Page URL",
-      "field": "landingPageUrl",
-      "subfieldPath": [],
-      "clearValueIfBlank": false
-    },
-    {
-      "header": "Description",
-      "field": "drupalEvent_drupalDescription_v2",
-      "subfieldPath": [
-        {
-          "name": "json"
-        }
-      ],
-      "clearValueIfBlank": false
-    },
-    {
-      "header": "Event Start",
-      "field": "time",
-      "subfieldPath": [
-        {
-          "name": "start"
-        }
-      ],
-      "clearValueIfBlank": false
-    },
-    {
-      "header": "ID",
-      "field": "entityId",
-      "subfieldPath": [],
-      "clearValueIfBlank": false
-    },
-    {
-      "header": "Event End",
-      "field": "time",
-      "subfieldPath": [
-        {
-          "name": "end"
-        }
-      ],
-      "clearValueIfBlank": false
-    },
-    {
-      "header": "Name",
-      "field": "name",
-      "subfieldPath": [],
-      "clearValueIfBlank": false
-    },
-    {
-      "header": "Location",
-      "field": "linkedLocation",
-      "subfieldPath": [],
-      "clearValueIfBlank": false
-    }
-  ],
-  "scheduleConfig": {
-    "customSchedule": {
-      "timeZone": "America/New_York",
-      "startDate": "2021-06-23",
-      "startTime": "03:00",
-      "frequencyType": "DAILY"
-    },
-    "runMode": "COMPREHENSIVE"
-  },
-  "comprehensiveModeConfig": {
-    "comprehensiveSet": "ENTITIES_CREATED_BY_THIS_CONNECTOR",
-    "actionOnMissingEntities": "DELETE"
-  }
 }
