@@ -3,8 +3,8 @@
   "$schema": "https://schema.yext.com/config/km/connector/v4",
   "displayName": "Drupal Place Connector",
   "entityTypes": [
-    "location"]
-  ,
+    "location"
+  ],
   "source": {
     "sourceConfig": {
       "nativeSourceConfig": {
