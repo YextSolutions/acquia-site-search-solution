@@ -4,7 +4,7 @@
   "name": "Drupal Article",
   "entityType": "drupalArticle_article",
   "fields": [
-    "v2_body",
+    "bodyV2",
     "landingPageUrl"
   ],
   "required": []
