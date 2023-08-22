@@ -98,7 +98,7 @@
             "subfieldPath": []
         },
         {
-            "field": "drupalPerson_drupalDescription",
+            "field": "drupalPerson_drupalDescription_v2",
             "header": "Description",
             "subfieldPath": [
                 {
