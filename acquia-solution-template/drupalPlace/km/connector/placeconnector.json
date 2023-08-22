@@ -113,7 +113,7 @@
             "subfieldPath": []
         },
         {
-            "field": "drupalPlace_drupalDescription",
+            "field": "drupalPlace_drupalDescription_v2",
             "header": "Description",
             "subfieldPath": [
                 {
