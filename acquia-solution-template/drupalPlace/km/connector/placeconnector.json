@@ -1,8 +1,10 @@
 {
   "$id": "drupalPlace_placeconnector",
-  "$schema": "https://schema.yext.com/config/km/connector/v2",
+  "$schema": "https://schema.yext.com/config/km/connector/v4",
   "displayName": "Drupal Place Connector",
-  "entityType": "location",
+  "entityTypes": [
+    "location"]
+  ,
   "source": {
     "sourceConfig": {
       "nativeSourceConfig": {
@@ -490,5 +492,9 @@
       "frequencyType": "DAILY"
     },
     "runMode": "COMPREHENSIVE"
-  }
+  },
+    "comprehensiveModeConfig": {
+        "comprehensiveSet": "ENTITIES_CREATED_BY_THIS_CONNECTOR",
+        "actionOnMissingEntities": "DELETE"
+    }
 }
