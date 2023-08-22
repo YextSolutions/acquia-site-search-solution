@@ -131,7 +131,7 @@
             "subfieldPath": []
         },
         {
-            "field": "drupalEvent_drupalDescription",
+            "field": "drupalEvent_drupalDescription_v2",
             "header": "Description",
             "subfieldPath": [
                 {
