@@ -1,8 +1,10 @@
 {
   "$id": "drupalArticle_articleconnector",
-  "$schema": "https://schema.yext.com/config/km/connector/v2",
+  "$schema": "https://schema.yext.com/config/km/connector/v4",
   "displayName": "Drupal Article Connector",
-  "entityType": "drupalArticle_article",
+  "entityTypes": [
+    "drupalArticle_article"
+  ],
   "source": {
     "sourceConfig": {
       "nativeSourceConfig": {
@@ -79,5 +81,9 @@
       "frequencyType": "DAILY"
     },
     "runMode": "COMPREHENSIVE"
-  }
+  },
+    "comprehensiveModeConfig": {
+        "comprehensiveSet": "ENTITIES_CREATED_BY_THIS_CONNECTOR",
+        "actionOnMissingEntities": "DELETE"
+    }
 }
