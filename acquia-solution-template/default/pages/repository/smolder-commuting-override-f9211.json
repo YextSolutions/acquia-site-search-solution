@@ -1,5 +1,5 @@
 {
-    "$id": "smolder-commuting-override-f9211",
+    "$id": "acquia-site-search-solution",
     "$schema": "https://schema.yext.com/config/pages/repository/v1",
     "repoUrl": "github.com/yext-pages/acquia-answers-${{businessId}}.com",
     "templateRepo": "github.com/yext-pages/answers.acquia.com"
